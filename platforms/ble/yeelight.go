@@ -100,13 +100,6 @@ func (b *YeelightDriver) Off() (err error) {
 	return
 }
 
-// Handle responses returned from Ollie
-func (b *YeelightDriver) HandleResponses(data []byte, e error) {
-	fmt.Println("response data:", data)
-
-	return
-}
-
 // SetRGB sets the Yeelight to the given r, g, and b values
 func (s *YeelightDriver) SetRGB(r uint8, g uint8, b uint8) (err error) {
 	// s.packetChannel <- s.craftPacket([]uint8{r, g, b, 0x01}, 0x02, 0x20)
@@ -126,6 +119,41 @@ func (s *YeelightDriver) SetRGB(r uint8, g uint8, b uint8) (err error) {
   }
 
   return
+}
+
+// Sets Yeelight Delay
+func (b *YeelightDriver) Delay() (err error) {
+	// TODO: Extract to craftPacket
+	buf := []byte(",,,0,,,,,,,,,,,,,,")
+
+	err = b.adaptor().WriteCharacteristic(YeelightService, ControlCharacteristic, buf)
+	if err != nil {
+		fmt.Println("Off error:", err)
+		return err
+	}
+
+	return
+}
+
+// Sets Yeelight Delay Query
+func (b *YeelightDriver) DelayQuery() (err error) {
+	// TODO: Extract to craftPacket
+	buf := []byte(",,,0,,,,,,,,,,,,,,")
+
+	err = b.adaptor().WriteCharacteristic(YeelightService, ControlCharacteristic, buf)
+	if err != nil {
+		fmt.Println("Off error:", err)
+		return err
+	}
+
+	return
+}
+
+// Handle responses returned from Ollie
+func (b *YeelightDriver) HandleResponses(data []byte, e error) {
+	fmt.Println("response data:", data)
+
+	return
 }
 
 // Go to sleep

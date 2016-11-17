@@ -1,9 +1,9 @@
 package main
 
 import (
-  "fmt"
+  // "fmt"
 	"os"
-	"time"
+	// "time"
 
 	"github.com/hybridgroup/gobot"
 	"github.com/hybridgroup/gobot/platforms/ble"
@@ -17,18 +17,21 @@ func main() {
 
 	work := func() {
     yeelight.On()
-  	// r := uint8(255)
-  	// g := uint8(255)
-  	// b := uint8(255)
-  	// _ = yeelight.SetRGB(r, g, b)
-		gobot.Every(5*time.Second, func() {
-			r := uint8(gobot.Rand(255))
-			g := uint8(gobot.Rand(255))
-			b := uint8(gobot.Rand(255))
-			_ = yeelight.SetRGB(r, g, b)
-      colour := fmt.Sprintf("Changing Colour to: %d,%d,%d", r, g, b)
-      fmt.Println(colour)
-		})
+  	// r := uint8(127)
+  	// g := uint8(63)
+  	// b := uint8(191)
+    r := uint8(255)
+    g := uint8(255)
+    b := uint8(255)
+  	yeelight.SetRGB(r, g, b)
+		// gobot.Every(5*time.Second, func() {
+		// 	r := uint8(gobot.Rand(255))
+		// 	g := uint8(gobot.Rand(255))
+		// 	b := uint8(gobot.Rand(255))
+		// 	_ = yeelight.SetRGB(r, g, b)
+    //   colour := fmt.Sprintf("Changing Colour to: %d,%d,%d", r, g, b)
+    //   fmt.Println(colour)
+		// })
 	}
 
 	robot := gobot.NewRobot("yeelightBot",
